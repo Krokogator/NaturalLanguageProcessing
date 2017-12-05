@@ -5,9 +5,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ADD DRAW CHECK BYE NAME1 NAME2 QUANTITY SMALL LARGE WHITE GREEN PLASTIC ALUMINUM OPEN WEBSITE EXECUTABLEoperation : OPEN WEBSITEoperation : OPEN EXECUTABLEoperation : ADD QUANTITY productoperation : DRAW QUANTITY productoperation : CHECK productoperation : BYEproduct : product_details NAMENAME : NAME1\n            | NAME2product_details : size color materialsize : SMALL\n            | LARGEcolor : WHITE\n             | GREENmaterial : ALUMINUM\n                | PLASTIC'
+_lr_signature = 'ADD DRAW CHECK BYE NAME1 NAME2 QUANTITY SMALL LARGE WHITE GREEN PLASTIC ALUMINUM OPEN CLOSE WEBSITE EXECUTABLE TXTPATHoperation : OPEN TXTPATHoperation : OPEN WEBSITEoperation : OPEN EXECUTABLEoperation : CLOSE EXECUTABLEoperation : ADD QUANTITY productoperation : DRAW QUANTITY productoperation : CHECK productoperation : BYEproduct : product_details NAMENAME : NAME1\n            | NAME2product_details : size color materialsize : SMALL\n            | LARGEcolor : WHITE\n             | GREENmaterial : ALUMINUM\n                | PLASTIC'
     
-_lr_action_items = {'QUANTITY':([4,6,],[12,15,]),'ALUMINUM':([19,20,21,],[-13,26,-14,]),'ADD':([0,],[4,]),'OPEN':([0,],[5,]),'WHITE':([8,9,11,],[-11,-12,19,]),'LARGE':([1,12,15,],[9,9,9,]),'EXECUTABLE':([5,],[14,]),'PLASTIC':([19,20,21,],[-13,25,-14,]),'CHECK':([0,],[1,]),'NAME2':([7,24,25,26,],[17,-10,-16,-15,]),'WEBSITE':([5,],[13,]),'SMALL':([1,12,15,],[8,8,8,]),'$end':([2,3,10,13,14,16,17,18,22,23,],[-6,0,-5,-1,-2,-7,-9,-8,-3,-4,]),'BYE':([0,],[2,]),'DRAW':([0,],[6,]),'NAME1':([7,24,25,26,],[18,-10,-16,-15,]),'GREEN':([8,9,11,],[-11,-12,21,]),}
+_lr_action_items = {'QUANTITY':([5,7,],[17,18,]),'NAME1':([10,27,28,29,],[19,-17,-18,-12,]),'TXTPATH':([3,],[13,]),'CHECK':([0,],[2,]),'EXECUTABLE':([3,4,],[14,16,]),'WHITE':([8,11,12,],[-14,-13,22,]),'OPEN':([0,],[3,]),'ALUMINUM':([22,23,24,],[-15,-16,27,]),'WEBSITE':([3,],[15,]),'CLOSE':([0,],[4,]),'LARGE':([2,17,18,],[8,8,8,]),'BYE':([0,],[6,]),'PLASTIC':([22,23,24,],[-15,-16,28,]),'ADD':([0,],[5,]),'$end':([1,6,9,13,14,15,16,19,20,21,25,26,],[0,-8,-7,-1,-3,-2,-4,-10,-11,-9,-5,-6,]),'DRAW':([0,],[7,]),'GREEN':([8,11,12,],[-14,-13,23,]),'NAME2':([10,27,28,29,],[20,-17,-18,-12,]),'SMALL':([2,17,18,],[11,11,11,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'product_details':([1,12,15,],[7,7,7,]),'material':([20,],[24,]),'operation':([0,],[3,]),'NAME':([7,],[16,]),'product':([1,12,15,],[10,22,23,]),'size':([1,12,15,],[11,11,11,]),'color':([11,],[20,]),}
+_lr_goto_items = {'product':([2,17,18,],[9,25,26,]),'operation':([0,],[1,]),'NAME':([10,],[21,]),'color':([12,],[24,]),'product_details':([2,17,18,],[10,10,10,]),'material':([24,],[29,]),'size':([2,17,18,],[12,12,12,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,20 +26,22 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> operation","S'",1,None,None,None),
-  ('operation -> OPEN WEBSITE','operation',2,'p_operation_open','Konsola.py',133),
-  ('operation -> OPEN EXECUTABLE','operation',2,'p_operation_executable','Konsola.py',138),
-  ('operation -> ADD QUANTITY product','operation',3,'p_operation_add','Konsola.py',146),
-  ('operation -> DRAW QUANTITY product','operation',3,'p_operation_draw','Konsola.py',156),
-  ('operation -> CHECK product','operation',2,'p_operation_check','Konsola.py',169),
-  ('operation -> BYE','operation',1,'p_operation_exit','Konsola.py',177),
-  ('product -> product_details NAME','product',2,'p_product','Konsola.py',182),
-  ('NAME -> NAME1','NAME',1,'p_name','Konsola.py',187),
-  ('NAME -> NAME2','NAME',1,'p_name','Konsola.py',188),
-  ('product_details -> size color material','product_details',3,'p_product_details','Konsola.py',193),
-  ('size -> SMALL','size',1,'p_size','Konsola.py',198),
-  ('size -> LARGE','size',1,'p_size','Konsola.py',199),
-  ('color -> WHITE','color',1,'p_color','Konsola.py',204),
-  ('color -> GREEN','color',1,'p_color','Konsola.py',205),
-  ('material -> ALUMINUM','material',1,'p_material','Konsola.py',210),
-  ('material -> PLASTIC','material',1,'p_material','Konsola.py',211),
+  ('operation -> OPEN TXTPATH','operation',2,'p_operation_open_txt','Konsola.py',137),
+  ('operation -> OPEN WEBSITE','operation',2,'p_operation_open_website','Konsola.py',142),
+  ('operation -> OPEN EXECUTABLE','operation',2,'p_operation_open_exe','Konsola.py',147),
+  ('operation -> CLOSE EXECUTABLE','operation',2,'p_operation_close_exe','Konsola.py',157),
+  ('operation -> ADD QUANTITY product','operation',3,'p_operation_add','Konsola.py',162),
+  ('operation -> DRAW QUANTITY product','operation',3,'p_operation_draw','Konsola.py',172),
+  ('operation -> CHECK product','operation',2,'p_operation_check','Konsola.py',185),
+  ('operation -> BYE','operation',1,'p_operation_exit','Konsola.py',193),
+  ('product -> product_details NAME','product',2,'p_product','Konsola.py',198),
+  ('NAME -> NAME1','NAME',1,'p_name','Konsola.py',203),
+  ('NAME -> NAME2','NAME',1,'p_name','Konsola.py',204),
+  ('product_details -> size color material','product_details',3,'p_product_details','Konsola.py',209),
+  ('size -> SMALL','size',1,'p_size','Konsola.py',214),
+  ('size -> LARGE','size',1,'p_size','Konsola.py',215),
+  ('color -> WHITE','color',1,'p_color','Konsola.py',220),
+  ('color -> GREEN','color',1,'p_color','Konsola.py',221),
+  ('material -> ALUMINUM','material',1,'p_material','Konsola.py',226),
+  ('material -> PLASTIC','material',1,'p_material','Konsola.py',227),
 ]

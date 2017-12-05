@@ -15,7 +15,7 @@ tokens = (
     'WHITE', 'GREEN',
     'PLASTIC', 'ALUMINUM',
     'OPEN', 'CLOSE',
-    'WEBSITE', 'EXECUTABLE'
+    'WEBSITE', 'EXECUTABLE', 'TXTPATH'
 )
 
 # Tokens
@@ -28,11 +28,13 @@ t_BYE = r'(?i)bye!?'
 t_OPEN = r'(?i)(otwó|orz)'
 t_CLOSE = r'(?i)(zamknij)|(zakoń|ncz)'
 
+
 # executable
 
 def t_EXECUTABLE(t):
-    r'[a-z]+\.exe'
+    r'[a-z\+]+\.exe'
     return t
+
 
 # website
 
@@ -40,6 +42,10 @@ def t_WEBSITE(t):
     r'(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+(pl)|(com)'
     return t
 
+
+def t_TXTPATH(t):
+    r'(?i)([a-z]\:)((\/|\\)?[a-z0-9][a-z0-9\-]+)*\.(txt)'
+    return t
 
 
 # sizes
@@ -131,10 +137,31 @@ products = {}
 
 Start = 'operation'
 
+def notify_text(text):
+    print(text)
+    text_to_speech(text)
+
+
+def text_to_speech(text):
+    import win32com.client as wincl
+    speak = wincl.Dispatch("SAPI.SpVoice")
+    speak.Speak(text)
+
+
+def p_operation_open_txt(t):
+    'operation : OPEN TXTPATH'
+    import os
+    os.startfile(t[2])
+    # notify()
+    text_to_speech("Otwieram dokument: " + t[2])
+
+
 def p_operation_open_website(t):
     'operation : OPEN WEBSITE'
-    print("Otwieram stronę: "+t[2])
     webbrowser.open_new_tab(t[2])
+    print("Otwieram stronę: " + t[2])
+    text_to_speech("Otwieram stronę " + t[2])
+
 
 def p_operation_open_exe(t):
     'operation : OPEN EXECUTABLE'
@@ -142,12 +169,15 @@ def p_operation_open_exe(t):
 
     try:
         win32api.WinExec(t[2])  # Works seamlessly
-    except: pass
+    except:
+        pass
+
 
 def p_operation_close_exe(t):
     'operation : CLOSE EXECUTABLE'
     print(t[2])
-    os.system("TASKKILL /F /IM "+t[2])
+    os.system("TASKKILL /F /IM " + t[2])
+
 
 def p_operation_add(t):
     'operation : ADD QUANTITY product'
@@ -179,6 +209,7 @@ def p_operation_check(t):
     except LookupError:
         print("Undefined name '%s'" % t[2])
         t[0] = 0
+
 
 def p_operation_exit(t):
     'operation : BYE'
@@ -237,3 +268,6 @@ while True:
     except EOFError:
         break
     parser.parse(s)
+
+
+
