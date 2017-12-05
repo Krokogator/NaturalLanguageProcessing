@@ -137,7 +137,10 @@ products = {}
 
 Start = 'operation'
 
-def notify_text(text):
+
+# response
+
+def notify(text):
     print(text)
     text_to_speech(text)
 
@@ -148,27 +151,26 @@ def text_to_speech(text):
     speak.Speak(text)
 
 
+# operations
+
 def p_operation_open_txt(t):
     'operation : OPEN TXTPATH'
-    import os
     os.startfile(t[2])
-    # notify()
-    text_to_speech("Otwieram dokument: " + t[2])
+    notify("Otwieram dokument " + t[2])
 
 
 def p_operation_open_website(t):
     'operation : OPEN WEBSITE'
     webbrowser.open_new_tab(t[2])
-    print("Otwieram stronę: " + t[2])
-    text_to_speech("Otwieram stronę " + t[2])
+    notify("Otwieram stronę " + t[2])
 
 
 def p_operation_open_exe(t):
     'operation : OPEN EXECUTABLE'
     import win32api  # if active state python is installed or install pywin32 package seperately
-
     try:
         win32api.WinExec(t[2])  # Works seamlessly
+        notify("Otwieram program " + t[2])
     except:
         pass
 
@@ -264,10 +266,7 @@ parser = yacc.yacc()
 
 while True:
     try:
-        s = input('Magazyn > ')
+        s = input('> ')
     except EOFError:
         break
     parser.parse(s)
-
-
-
