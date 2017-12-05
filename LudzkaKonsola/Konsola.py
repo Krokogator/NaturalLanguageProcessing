@@ -13,7 +13,8 @@ tokens = (
     'SMALL', 'LARGE',
     'WHITE', 'GREEN',
     'PLASTIC', 'ALUMINUM',
-    'OPEN', 'WEBSITE'
+    'OPEN',
+    'WEBSITE', 'EXECUTABLE'
 )
 
 # Tokens
@@ -25,11 +26,19 @@ t_CHECK = r'(?i)(how\smany)'
 t_BYE = r'(?i)bye!?'
 t_OPEN = r'(?i)(otwó|orz)'
 
+# executable
+
+def t_EXECUTABLE(t):
+    r'[a-z]+\.exe'
+    return t
+
 # website
 
 def t_WEBSITE(t):
-    r'(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+[a-z0-9][a-z0-9\-]*'
+    r'(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+(pl)|(com)'
     return t
+
+
 
 # sizes
 
@@ -124,6 +133,14 @@ def p_operation_open(t):
     'operation : OPEN WEBSITE'
     print("Otwieram stronę: "+t[2])
     webbrowser.open_new_tab(t[2])
+
+def p_operation_executable(t):
+    'operation : OPEN EXECUTABLE'
+    import win32api  # if active state python is installed or install pywin32 package seperately
+
+    try:
+        win32api.WinExec(t[2])  # Works seamlessly
+    except: pass
 
 def p_operation_add(t):
     'operation : ADD QUANTITY product'

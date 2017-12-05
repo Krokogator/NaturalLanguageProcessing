@@ -5,9 +5,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ADD DRAW CHECK BYE NAME1 NAME2 QUANTITY SMALL LARGE WHITE GREEN PLASTIC ALUMINUM OPEN WEBSITEoperation : OPEN WEBSITEoperation : ADD QUANTITY productoperation : DRAW QUANTITY productoperation : CHECK productoperation : BYEproduct : product_details NAMENAME : NAME1\n            | NAME2product_details : size color materialsize : SMALL\n            | LARGEcolor : WHITE\n             | GREENmaterial : ALUMINUM\n                | PLASTIC'
+_lr_signature = 'ADD DRAW CHECK BYE NAME1 NAME2 QUANTITY SMALL LARGE WHITE GREEN PLASTIC ALUMINUM OPEN WEBSITE EXECUTABLEoperation : OPEN WEBSITEoperation : OPEN EXECUTABLEoperation : ADD QUANTITY productoperation : DRAW QUANTITY productoperation : CHECK productoperation : BYEproduct : product_details NAMENAME : NAME1\n            | NAME2product_details : size color materialsize : SMALL\n            | LARGEcolor : WHITE\n             | GREENmaterial : ALUMINUM\n                | PLASTIC'
     
-_lr_action_items = {'ADD':([0,],[3,]),'NAME1':([13,23,24,25,],[20,-15,-14,-9,]),'CHECK':([0,],[6,]),'NAME2':([13,23,24,25,],[21,-15,-14,-9,]),'LARGE':([6,7,8,],[11,11,11,]),'GREEN':([10,11,12,],[-10,-11,18,]),'ALUMINUM':([17,18,19,],[24,-13,-12,]),'BYE':([0,],[4,]),'WHITE':([10,11,12,],[-10,-11,19,]),'SMALL':([6,7,8,],[10,10,10,]),'OPEN':([0,],[5,]),'WEBSITE':([5,],[9,]),'QUANTITY':([2,3,],[7,8,]),'PLASTIC':([17,18,19,],[23,-13,-12,]),'DRAW':([0,],[2,]),'$end':([1,4,9,14,15,16,20,21,22,],[0,-5,-1,-4,-3,-2,-7,-8,-6,]),}
+_lr_action_items = {'QUANTITY':([4,6,],[12,15,]),'ALUMINUM':([19,20,21,],[-13,26,-14,]),'ADD':([0,],[4,]),'OPEN':([0,],[5,]),'WHITE':([8,9,11,],[-11,-12,19,]),'LARGE':([1,12,15,],[9,9,9,]),'EXECUTABLE':([5,],[14,]),'PLASTIC':([19,20,21,],[-13,25,-14,]),'CHECK':([0,],[1,]),'NAME2':([7,24,25,26,],[17,-10,-16,-15,]),'WEBSITE':([5,],[13,]),'SMALL':([1,12,15,],[8,8,8,]),'$end':([2,3,10,13,14,16,17,18,22,23,],[-6,0,-5,-1,-2,-7,-9,-8,-3,-4,]),'BYE':([0,],[2,]),'DRAW':([0,],[6,]),'NAME1':([7,24,25,26,],[18,-10,-16,-15,]),'GREEN':([8,9,11,],[-11,-12,21,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'operation':([0,],[1,]),'material':([17,],[25,]),'size':([6,7,8,],[12,12,12,]),'product_details':([6,7,8,],[13,13,13,]),'color':([12,],[17,]),'product':([6,7,8,],[14,15,16,]),'NAME':([13,],[22,]),}
+_lr_goto_items = {'product_details':([1,12,15,],[7,7,7,]),'material':([20,],[24,]),'operation':([0,],[3,]),'NAME':([7,],[16,]),'product':([1,12,15,],[10,22,23,]),'size':([1,12,15,],[11,11,11,]),'color':([11,],[20,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,19 +26,20 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> operation","S'",1,None,None,None),
-  ('operation -> OPEN WEBSITE','operation',2,'p_operation_open','Stonoga.py',123),
-  ('operation -> ADD QUANTITY product','operation',3,'p_operation_add','Stonoga.py',127),
-  ('operation -> DRAW QUANTITY product','operation',3,'p_operation_draw','Stonoga.py',137),
-  ('operation -> CHECK product','operation',2,'p_operation_check','Stonoga.py',150),
-  ('operation -> BYE','operation',1,'p_operation_exit','Stonoga.py',158),
-  ('product -> product_details NAME','product',2,'p_product','Stonoga.py',163),
-  ('NAME -> NAME1','NAME',1,'p_name','Stonoga.py',168),
-  ('NAME -> NAME2','NAME',1,'p_name','Stonoga.py',169),
-  ('product_details -> size color material','product_details',3,'p_product_details','Stonoga.py',174),
-  ('size -> SMALL','size',1,'p_size','Stonoga.py',179),
-  ('size -> LARGE','size',1,'p_size','Stonoga.py',180),
-  ('color -> WHITE','color',1,'p_color','Stonoga.py',185),
-  ('color -> GREEN','color',1,'p_color','Stonoga.py',186),
-  ('material -> ALUMINUM','material',1,'p_material','Stonoga.py',191),
-  ('material -> PLASTIC','material',1,'p_material','Stonoga.py',192),
+  ('operation -> OPEN WEBSITE','operation',2,'p_operation_open','Konsola.py',133),
+  ('operation -> OPEN EXECUTABLE','operation',2,'p_operation_executable','Konsola.py',138),
+  ('operation -> ADD QUANTITY product','operation',3,'p_operation_add','Konsola.py',146),
+  ('operation -> DRAW QUANTITY product','operation',3,'p_operation_draw','Konsola.py',156),
+  ('operation -> CHECK product','operation',2,'p_operation_check','Konsola.py',169),
+  ('operation -> BYE','operation',1,'p_operation_exit','Konsola.py',177),
+  ('product -> product_details NAME','product',2,'p_product','Konsola.py',182),
+  ('NAME -> NAME1','NAME',1,'p_name','Konsola.py',187),
+  ('NAME -> NAME2','NAME',1,'p_name','Konsola.py',188),
+  ('product_details -> size color material','product_details',3,'p_product_details','Konsola.py',193),
+  ('size -> SMALL','size',1,'p_size','Konsola.py',198),
+  ('size -> LARGE','size',1,'p_size','Konsola.py',199),
+  ('color -> WHITE','color',1,'p_color','Konsola.py',204),
+  ('color -> GREEN','color',1,'p_color','Konsola.py',205),
+  ('material -> ALUMINUM','material',1,'p_material','Konsola.py',210),
+  ('material -> PLASTIC','material',1,'p_material','Konsola.py',211),
 ]
