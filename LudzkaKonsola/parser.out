@@ -7,52 +7,21 @@ Rule 1     operation -> OPEN TXTPATH
 Rule 2     operation -> OPEN WEBSITE
 Rule 3     operation -> OPEN EXECUTABLE
 Rule 4     operation -> CLOSE EXECUTABLE
-Rule 5     operation -> ADD QUANTITY product
-Rule 6     operation -> DRAW QUANTITY product
-Rule 7     operation -> CHECK product
-Rule 8     operation -> BYE
-Rule 9     product -> product_details NAME
-Rule 10    NAME -> NAME1
-Rule 11    NAME -> NAME2
-Rule 12    product_details -> size color material
-Rule 13    size -> SMALL
-Rule 14    size -> LARGE
-Rule 15    color -> WHITE
-Rule 16    color -> GREEN
-Rule 17    material -> ALUMINUM
-Rule 18    material -> PLASTIC
+Rule 5     operation -> BYE
 
 Terminals, with rules where they appear
 
-ADD                  : 5
-ALUMINUM             : 17
-BYE                  : 8
-CHECK                : 7
+BYE                  : 5
 CLOSE                : 4
-DRAW                 : 6
 EXECUTABLE           : 3 4
-GREEN                : 16
-LARGE                : 14
-NAME1                : 10
-NAME2                : 11
 OPEN                 : 1 2 3
-PLASTIC              : 18
-QUANTITY             : 5 6
-SMALL                : 13
 TXTPATH              : 1
 WEBSITE              : 2
-WHITE                : 15
 error                : 
 
 Nonterminals, with rules where they appear
 
-NAME                 : 9
-color                : 12
-material             : 12
 operation            : 0
-product              : 5 6 7
-product_details      : 9
-size                 : 12
 
 Parsing method: LALR
 
@@ -63,265 +32,69 @@ state 0
     (2) operation -> . OPEN WEBSITE
     (3) operation -> . OPEN EXECUTABLE
     (4) operation -> . CLOSE EXECUTABLE
-    (5) operation -> . ADD QUANTITY product
-    (6) operation -> . DRAW QUANTITY product
-    (7) operation -> . CHECK product
-    (8) operation -> . BYE
+    (5) operation -> . BYE
 
-    OPEN            shift and go to state 3
-    CLOSE           shift and go to state 4
-    ADD             shift and go to state 5
-    DRAW            shift and go to state 7
-    CHECK           shift and go to state 2
-    BYE             shift and go to state 6
+    OPEN            shift and go to state 1
+    CLOSE           shift and go to state 3
+    BYE             shift and go to state 4
 
-    operation                      shift and go to state 1
+    operation                      shift and go to state 2
 
 state 1
-
-    (0) S' -> operation .
-
-
-
-state 2
-
-    (7) operation -> CHECK . product
-    (9) product -> . product_details NAME
-    (12) product_details -> . size color material
-    (13) size -> . SMALL
-    (14) size -> . LARGE
-
-    SMALL           shift and go to state 11
-    LARGE           shift and go to state 8
-
-    product                        shift and go to state 9
-    size                           shift and go to state 12
-    product_details                shift and go to state 10
-
-state 3
 
     (1) operation -> OPEN . TXTPATH
     (2) operation -> OPEN . WEBSITE
     (3) operation -> OPEN . EXECUTABLE
 
-    TXTPATH         shift and go to state 13
-    WEBSITE         shift and go to state 15
-    EXECUTABLE      shift and go to state 14
+    TXTPATH         shift and go to state 5
+    WEBSITE         shift and go to state 6
+    EXECUTABLE      shift and go to state 7
+
+
+state 2
+
+    (0) S' -> operation .
+
+
+
+state 3
+
+    (4) operation -> CLOSE . EXECUTABLE
+
+    EXECUTABLE      shift and go to state 8
 
 
 state 4
 
-    (4) operation -> CLOSE . EXECUTABLE
+    (5) operation -> BYE .
 
-    EXECUTABLE      shift and go to state 16
+    $end            reduce using rule 5 (operation -> BYE .)
 
 
 state 5
-
-    (5) operation -> ADD . QUANTITY product
-
-    QUANTITY        shift and go to state 17
-
-
-state 6
-
-    (8) operation -> BYE .
-
-    $end            reduce using rule 8 (operation -> BYE .)
-
-
-state 7
-
-    (6) operation -> DRAW . QUANTITY product
-
-    QUANTITY        shift and go to state 18
-
-
-state 8
-
-    (14) size -> LARGE .
-
-    WHITE           reduce using rule 14 (size -> LARGE .)
-    GREEN           reduce using rule 14 (size -> LARGE .)
-
-
-state 9
-
-    (7) operation -> CHECK product .
-
-    $end            reduce using rule 7 (operation -> CHECK product .)
-
-
-state 10
-
-    (9) product -> product_details . NAME
-    (10) NAME -> . NAME1
-    (11) NAME -> . NAME2
-
-    NAME1           shift and go to state 19
-    NAME2           shift and go to state 20
-
-    NAME                           shift and go to state 21
-
-state 11
-
-    (13) size -> SMALL .
-
-    WHITE           reduce using rule 13 (size -> SMALL .)
-    GREEN           reduce using rule 13 (size -> SMALL .)
-
-
-state 12
-
-    (12) product_details -> size . color material
-    (15) color -> . WHITE
-    (16) color -> . GREEN
-
-    WHITE           shift and go to state 22
-    GREEN           shift and go to state 23
-
-    color                          shift and go to state 24
-
-state 13
 
     (1) operation -> OPEN TXTPATH .
 
     $end            reduce using rule 1 (operation -> OPEN TXTPATH .)
 
 
-state 14
-
-    (3) operation -> OPEN EXECUTABLE .
-
-    $end            reduce using rule 3 (operation -> OPEN EXECUTABLE .)
-
-
-state 15
+state 6
 
     (2) operation -> OPEN WEBSITE .
 
     $end            reduce using rule 2 (operation -> OPEN WEBSITE .)
 
 
-state 16
+state 7
+
+    (3) operation -> OPEN EXECUTABLE .
+
+    $end            reduce using rule 3 (operation -> OPEN EXECUTABLE .)
+
+
+state 8
 
     (4) operation -> CLOSE EXECUTABLE .
 
     $end            reduce using rule 4 (operation -> CLOSE EXECUTABLE .)
-
-
-state 17
-
-    (5) operation -> ADD QUANTITY . product
-    (9) product -> . product_details NAME
-    (12) product_details -> . size color material
-    (13) size -> . SMALL
-    (14) size -> . LARGE
-
-    SMALL           shift and go to state 11
-    LARGE           shift and go to state 8
-
-    product                        shift and go to state 25
-    size                           shift and go to state 12
-    product_details                shift and go to state 10
-
-state 18
-
-    (6) operation -> DRAW QUANTITY . product
-    (9) product -> . product_details NAME
-    (12) product_details -> . size color material
-    (13) size -> . SMALL
-    (14) size -> . LARGE
-
-    SMALL           shift and go to state 11
-    LARGE           shift and go to state 8
-
-    product                        shift and go to state 26
-    size                           shift and go to state 12
-    product_details                shift and go to state 10
-
-state 19
-
-    (10) NAME -> NAME1 .
-
-    $end            reduce using rule 10 (NAME -> NAME1 .)
-
-
-state 20
-
-    (11) NAME -> NAME2 .
-
-    $end            reduce using rule 11 (NAME -> NAME2 .)
-
-
-state 21
-
-    (9) product -> product_details NAME .
-
-    $end            reduce using rule 9 (product -> product_details NAME .)
-
-
-state 22
-
-    (15) color -> WHITE .
-
-    ALUMINUM        reduce using rule 15 (color -> WHITE .)
-    PLASTIC         reduce using rule 15 (color -> WHITE .)
-
-
-state 23
-
-    (16) color -> GREEN .
-
-    ALUMINUM        reduce using rule 16 (color -> GREEN .)
-    PLASTIC         reduce using rule 16 (color -> GREEN .)
-
-
-state 24
-
-    (12) product_details -> size color . material
-    (17) material -> . ALUMINUM
-    (18) material -> . PLASTIC
-
-    ALUMINUM        shift and go to state 27
-    PLASTIC         shift and go to state 28
-
-    material                       shift and go to state 29
-
-state 25
-
-    (5) operation -> ADD QUANTITY product .
-
-    $end            reduce using rule 5 (operation -> ADD QUANTITY product .)
-
-
-state 26
-
-    (6) operation -> DRAW QUANTITY product .
-
-    $end            reduce using rule 6 (operation -> DRAW QUANTITY product .)
-
-
-state 27
-
-    (17) material -> ALUMINUM .
-
-    NAME1           reduce using rule 17 (material -> ALUMINUM .)
-    NAME2           reduce using rule 17 (material -> ALUMINUM .)
-
-
-state 28
-
-    (18) material -> PLASTIC .
-
-    NAME1           reduce using rule 18 (material -> PLASTIC .)
-    NAME2           reduce using rule 18 (material -> PLASTIC .)
-
-
-state 29
-
-    (12) product_details -> size color material .
-
-    NAME1           reduce using rule 12 (product_details -> size color material .)
-    NAME2           reduce using rule 12 (product_details -> size color material .)
 
