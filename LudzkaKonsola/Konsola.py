@@ -1,3 +1,4 @@
+import os
 import webbrowser
 
 print("Przykładowe komendy: ")
@@ -13,7 +14,7 @@ tokens = (
     'SMALL', 'LARGE',
     'WHITE', 'GREEN',
     'PLASTIC', 'ALUMINUM',
-    'OPEN',
+    'OPEN', 'CLOSE',
     'WEBSITE', 'EXECUTABLE'
 )
 
@@ -25,6 +26,7 @@ t_DRAW = r'(?i)(wydano)'
 t_CHECK = r'(?i)(how\smany)'
 t_BYE = r'(?i)bye!?'
 t_OPEN = r'(?i)(otwó|orz)'
+t_CLOSE = r'(?i)(zamknij)|(zakoń|ncz)'
 
 # executable
 
@@ -129,18 +131,23 @@ products = {}
 
 Start = 'operation'
 
-def p_operation_open(t):
+def p_operation_open_website(t):
     'operation : OPEN WEBSITE'
     print("Otwieram stronę: "+t[2])
     webbrowser.open_new_tab(t[2])
 
-def p_operation_executable(t):
+def p_operation_open_exe(t):
     'operation : OPEN EXECUTABLE'
     import win32api  # if active state python is installed or install pywin32 package seperately
 
     try:
         win32api.WinExec(t[2])  # Works seamlessly
     except: pass
+
+def p_operation_close_exe(t):
+    'operation : CLOSE EXECUTABLE'
+    print(t[2])
+    os.system("TASKKILL /F /IM "+t[2])
 
 def p_operation_add(t):
     'operation : ADD QUANTITY product'
