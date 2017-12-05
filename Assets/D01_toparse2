@@ -1,0 +1,68 @@
+## beg. len.  text         tags                  annot.text  annotations
+01 0000 10    Mieszkanie   !pl,token             Mieszkanie  T
+02 0000 10    Mieszkanie   !pl,lamerlemma,morfologik-tagset,normalization mieszkanie term[1]
+03 0000 10    Mieszkanie   !pl,lamerlemma,lemma,morfologik-tagset mieszkanie word[2]
+04 0000 10    Mieszkanie   !pl,lamerlemma,lexeme,morfologik-tagset mieszkanie+subst subst[3]
+05 0000 10    Mieszkanie   !pl,form,lamerlemma,morfologik-tagset mieszkanie subst,case=acc,gender=n,ncol=ncol,number=sg[4]
+06 0000 10    Mieszkanie   !pl,form,lamerlemma,morfologik-tagset mieszkanie subst,case=nom,gender=n,ncol=ncol,number=sg[4]
+07 0000 10    Mieszkanie   !pl,discarded,form,lamerlemma,morfologik-tagset mieszkanie subst,case=voc,gender=n,ncol=ncol,number=sg[4(!pl,form,lamerlemma,morfologik-tagset),<-1.79769e+308>]
+08 0000 10    Mieszkanie   !pl,lamerlemma,lemma,morfologik-tagset mieszkać word[2]
+09 0000 10    Mieszkanie   !pl,lamerlemma,lexeme,morfologik-tagset mieszkać+ger ger[8]
+10 0000 10    Mieszkanie   !pl,discarded,form,lamerlemma,morfologik-tagset mieszkanie ger,case=acc,gender=n,number=sg,aspect=imperf,negation=aff[9(!pl,form,lamerlemma,morfologik-tagset),<-1.79769e+308>]
+11 0000 10    Mieszkanie   !pl,discarded,form,lamerlemma,morfologik-tagset mieszkanie ger,case=nom,gender=n,number=sg,aspect=imperf,negation=aff[9(!pl,form,lamerlemma,morfologik-tagset),<-1.79769e+308>]
+12 0000 10    Mieszkanie   !pl,parse,puddle                  NP,case=acc,gender=n,ncol=ncol,number=sg,head=0[5]
+13 0000 10    Mieszkanie   !pl,parse,puddle                  NP,case=nom,gender=n,ncol=ncol,number=sg,head=0[6]
+14 0010 01    ,            !pl,token             ,           I
+15 0010 01    ,            !pl,lemma,puddle      ,           word[14]
+16 0010 01    ,            !pl,lexeme,puddle     ,+interp    interp[15]
+17 0010 01    ,            !pl,puddle,token      ,           interp[16]
+18 0011 01    _            !pl,token             _           B
+19 0012 08    czerwony     !pl,token             czerwony    T
+20 0012 08    czerwony     !pl,lamerlemma,morfologik-tagset,normalization czerwony term[19]
+21 0012 08    czerwony     !pl,lamerlemma,lemma,morfologik-tagset czerwony:a word[20]
+22 0012 08    czerwony     !pl,lamerlemma,lexeme,morfologik-tagset czerwony:a+adj adj[21]
+23 0012 08    czerwony     !pl,form,lamerlemma,morfologik-tagset czerwony adj,case=acc,gender=m3,number=sg,degree=pos[22]
+24 0012 08    czerwony     !pl,form,lamerlemma,morfologik-tagset czerwony adj,case=nom,gender=m1,number=sg,degree=pos[22]
+25 0012 08    czerwony     !pl,form,lamerlemma,morfologik-tagset czerwony adj,case=nom,gender=m2,number=sg,degree=pos[22]
+26 0012 08    czerwony     !pl,form,lamerlemma,morfologik-tagset czerwony adj,case=nom,gender=m3,number=sg,degree=pos[22]
+27 0012 08    czerwony     !pl,form,lamerlemma,morfologik-tagset czerwony adj,case=voc,gender=m1,number=sg,degree=pos[22]
+28 0012 08    czerwony     !pl,form,lamerlemma,morfologik-tagset czerwony adj,case=voc,gender=m2,number=sg,degree=pos[22]
+29 0012 08    czerwony     !pl,form,lamerlemma,morfologik-tagset czerwony adj,case=voc,gender=m3,number=sg,degree=pos[22]
+30 0012 08    czerwony     !pl,lamerlemma,lemma,morfologik-tagset czerwony:s word[20]
+31 0012 08    czerwony     !pl,lamerlemma,lexeme,morfologik-tagset czerwony:s+subst subst[30]
+32 0012 08    czerwony     !pl,discarded,form,lamerlemma,morfologik-tagset czerwony subst,case=nom,gender=m1,number=sg[31(!pl,form,lamerlemma,morfologik-tagset),<-1.79769e+308>]
+33 0012 08    czerwony     !pl,discarded,form,lamerlemma,morfologik-tagset czerwony subst,case=voc,gender=m1,number=sg[31(!pl,form,lamerlemma,morfologik-tagset),<-1.79769e+308>]
+34 0012 08    czerwony     !pl,parse,puddle                  AP,case=acc,gender=m3,number=sg,degree=pos,head=0[23]
+35 0012 08    czerwony     !pl,parse,puddle                  AP,case=nom,gender=m1,number=sg,degree=pos,head=0[24]
+36 0012 08    czerwony     !pl,parse,puddle                  AP,case=nom,gender=m2,number=sg,degree=pos,head=0[25]
+37 0012 08    czerwony     !pl,parse,puddle                  AP,case=nom,gender=m3,number=sg,degree=pos,head=0[26]
+38 0012 08    czerwony     !pl,parse,puddle                  AP,case=voc,gender=m1,number=sg,degree=pos,head=0[27]
+39 0012 08    czerwony     !pl,parse,puddle                  AP,case=voc,gender=m2,number=sg,degree=pos,head=0[28]
+40 0012 08    czerwony     !pl,parse,puddle                  AP,case=voc,gender=m3,number=sg,degree=pos,head=0[29]
+41 0020 01    _            !pl,token             _           B
+42 0021 06    lampka       !pl,token             lampka      T
+43 0021 06    lampka       !pl,lamerlemma,morfologik-tagset,normalization lampka term[42]
+44 0021 06    lampka       !pl,lamerlemma,lemma,morfologik-tagset lampka word[43]
+45 0021 06    lampka       !pl,lamerlemma,lexeme,morfologik-tagset lampka+subst subst[44]
+46 0021 06    lampka       !pl,form,lamerlemma,morfologik-tagset lampka subst,case=nom,gender=f,number=sg[45]
+47 0021 06    lampka       !pl,parse,puddle                  NP,case=nom,gender=f,number=sg,head=0[46]
+48 0027 01    _            !pl,token             _           B
+49 0028 05    biega        !pl,token             biega       T
+50 0028 05    biega        !pl,lamerlemma,morfologik-tagset,normalization biega term[49]
+51 0028 05    biega        !pl,lamerlemma,lemma,morfologik-tagset biegać word[50]
+52 0028 05    biega        !pl,lamerlemma,lexeme,morfologik-tagset biegać+fin fin[51]
+53 0028 05    biega        !pl,form,lamerlemma,morfologik-tagset biega fin,number=sg,aspect=imperf,person=ter[52]
+54 0033 01    _            !pl,token             _           B
+55 0034 06    jezdzi       !pl,token             jezdzi      T
+56 0040 01    _            !pl,token             _           B
+57 0041 04    test         !pl,token             test        T
+58 0041 04    test         !pl,lamerlemma,morfologik-tagset,normalization test term[57]
+59 0041 04    test         !pl,lamerlemma,lemma,morfologik-tagset test word[58]
+60 0041 04    test         !pl,lamerlemma,lexeme,morfologik-tagset test+subst subst[59]
+61 0041 04    test         !pl,form,lamerlemma,morfologik-tagset test subst,case=acc,gender=m3,number=sg[60]
+62 0041 04    test         !pl,form,lamerlemma,morfologik-tagset test subst,case=nom,gender=m3,number=sg[60]
+63 0041 04    test         !pl,parse,puddle                  NP,case=acc,gender=m3,number=sg,head=0[61]
+64 0041 04    test         !pl,parse,puddle                  NP,case=nom,gender=m3,number=sg,head=0[62]
+65 0000 46    Mieszkanie,_czerwony_lampka_biega_jezdzi_test. frag,txt-reader Mieszkanie,_czerwony_lampka_biega_jezdzi_test. FRAG[]
+66 0000 46    Mieszk...st. !pl,lang-guesser,text Mieszkanie,_czerwony_lampka_biega_jezdzi_test. TEXT[65]
+67 0045 01    .            !pl,token             .           I

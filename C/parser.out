@@ -1,0 +1,266 @@
+Created by PLY version 3.10 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> operation
+Rule 1     operation -> ADD QUANTITY product
+Rule 2     operation -> DRAW QUANTITY product
+Rule 3     operation -> CHECK product
+Rule 4     operation -> BYE
+Rule 5     product -> product_details NAME
+Rule 6     NAME -> NAME1
+Rule 7     NAME -> NAME2
+Rule 8     product_details -> size color material
+Rule 9     size -> SMALL
+Rule 10    size -> LARGE
+Rule 11    color -> WHITE
+Rule 12    color -> GREEN
+Rule 13    material -> ALUMINUM
+Rule 14    material -> PLASTIC
+
+Terminals, with rules where they appear
+
+ADD                  : 1
+ALUMINUM             : 13
+BYE                  : 4
+CHECK                : 3
+DRAW                 : 2
+GREEN                : 12
+LARGE                : 10
+NAME1                : 6
+NAME2                : 7
+PLASTIC              : 14
+QUANTITY             : 1 2
+SMALL                : 9
+WHITE                : 11
+error                : 
+
+Nonterminals, with rules where they appear
+
+NAME                 : 5
+color                : 8
+material             : 8
+operation            : 0
+product              : 1 2 3
+product_details      : 5
+size                 : 8
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . operation
+    (1) operation -> . ADD QUANTITY product
+    (2) operation -> . DRAW QUANTITY product
+    (3) operation -> . CHECK product
+    (4) operation -> . BYE
+
+    ADD             shift and go to state 1
+    DRAW            shift and go to state 4
+    CHECK           shift and go to state 5
+    BYE             shift and go to state 3
+
+    operation                      shift and go to state 2
+
+state 1
+
+    (1) operation -> ADD . QUANTITY product
+
+    QUANTITY        shift and go to state 6
+
+
+state 2
+
+    (0) S' -> operation .
+
+
+
+state 3
+
+    (4) operation -> BYE .
+
+    $end            reduce using rule 4 (operation -> BYE .)
+
+
+state 4
+
+    (2) operation -> DRAW . QUANTITY product
+
+    QUANTITY        shift and go to state 7
+
+
+state 5
+
+    (3) operation -> CHECK . product
+    (5) product -> . product_details NAME
+    (8) product_details -> . size color material
+    (9) size -> . SMALL
+    (10) size -> . LARGE
+
+    SMALL           shift and go to state 10
+    LARGE           shift and go to state 9
+
+    size                           shift and go to state 8
+    product                        shift and go to state 11
+    product_details                shift and go to state 12
+
+state 6
+
+    (1) operation -> ADD QUANTITY . product
+    (5) product -> . product_details NAME
+    (8) product_details -> . size color material
+    (9) size -> . SMALL
+    (10) size -> . LARGE
+
+    SMALL           shift and go to state 10
+    LARGE           shift and go to state 9
+
+    size                           shift and go to state 8
+    product                        shift and go to state 13
+    product_details                shift and go to state 12
+
+state 7
+
+    (2) operation -> DRAW QUANTITY . product
+    (5) product -> . product_details NAME
+    (8) product_details -> . size color material
+    (9) size -> . SMALL
+    (10) size -> . LARGE
+
+    SMALL           shift and go to state 10
+    LARGE           shift and go to state 9
+
+    size                           shift and go to state 8
+    product                        shift and go to state 14
+    product_details                shift and go to state 12
+
+state 8
+
+    (8) product_details -> size . color material
+    (11) color -> . WHITE
+    (12) color -> . GREEN
+
+    WHITE           shift and go to state 17
+    GREEN           shift and go to state 16
+
+    color                          shift and go to state 15
+
+state 9
+
+    (10) size -> LARGE .
+
+    WHITE           reduce using rule 10 (size -> LARGE .)
+    GREEN           reduce using rule 10 (size -> LARGE .)
+
+
+state 10
+
+    (9) size -> SMALL .
+
+    WHITE           reduce using rule 9 (size -> SMALL .)
+    GREEN           reduce using rule 9 (size -> SMALL .)
+
+
+state 11
+
+    (3) operation -> CHECK product .
+
+    $end            reduce using rule 3 (operation -> CHECK product .)
+
+
+state 12
+
+    (5) product -> product_details . NAME
+    (6) NAME -> . NAME1
+    (7) NAME -> . NAME2
+
+    NAME1           shift and go to state 19
+    NAME2           shift and go to state 20
+
+    NAME                           shift and go to state 18
+
+state 13
+
+    (1) operation -> ADD QUANTITY product .
+
+    $end            reduce using rule 1 (operation -> ADD QUANTITY product .)
+
+
+state 14
+
+    (2) operation -> DRAW QUANTITY product .
+
+    $end            reduce using rule 2 (operation -> DRAW QUANTITY product .)
+
+
+state 15
+
+    (8) product_details -> size color . material
+    (13) material -> . ALUMINUM
+    (14) material -> . PLASTIC
+
+    ALUMINUM        shift and go to state 21
+    PLASTIC         shift and go to state 23
+
+    material                       shift and go to state 22
+
+state 16
+
+    (12) color -> GREEN .
+
+    ALUMINUM        reduce using rule 12 (color -> GREEN .)
+    PLASTIC         reduce using rule 12 (color -> GREEN .)
+
+
+state 17
+
+    (11) color -> WHITE .
+
+    ALUMINUM        reduce using rule 11 (color -> WHITE .)
+    PLASTIC         reduce using rule 11 (color -> WHITE .)
+
+
+state 18
+
+    (5) product -> product_details NAME .
+
+    $end            reduce using rule 5 (product -> product_details NAME .)
+
+
+state 19
+
+    (6) NAME -> NAME1 .
+
+    $end            reduce using rule 6 (NAME -> NAME1 .)
+
+
+state 20
+
+    (7) NAME -> NAME2 .
+
+    $end            reduce using rule 7 (NAME -> NAME2 .)
+
+
+state 21
+
+    (13) material -> ALUMINUM .
+
+    NAME1           reduce using rule 13 (material -> ALUMINUM .)
+    NAME2           reduce using rule 13 (material -> ALUMINUM .)
+
+
+state 22
+
+    (8) product_details -> size color material .
+
+    NAME1           reduce using rule 8 (product_details -> size color material .)
+    NAME2           reduce using rule 8 (product_details -> size color material .)
+
+
+state 23
+
+    (14) material -> PLASTIC .
+
+    NAME1           reduce using rule 14 (material -> PLASTIC .)
+    NAME2           reduce using rule 14 (material -> PLASTIC .)
+
