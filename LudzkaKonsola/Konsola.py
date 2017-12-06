@@ -3,13 +3,14 @@ import webbrowser
 import ply.yacc as yacc
 
 global textToSpeech
-textToSpeech = False
+textToSpeech = True
 
 print("Przykładowe komendy: ")
 print("> \"Otwórz (stronę|witrynę)? google.pl\"")
 print("> \"Otwórz (program|aplikację)? chrome\"")
 print("> \"Zamknij (program|aplikację)? chrome\"")
 print("> \"Otwórz (dokument|plik|plik tekstowy)? C:/Users/userX/Desktop/dokument.txt\"")
+print("> \"Uruchom|Wyłącz asystenta głosowego\"")
 print("> \"Koniec na dzisiaj\"")
 
 tokens = (
@@ -23,7 +24,7 @@ tokens = (
 # Tokens
 
 # operations
-t_BYE = r'(?i)(ko(niec|(n|ń)czymy)\sna\sdzi(ś|(s(iaj?))))'
+t_BYE = r'(?i)(ko(niec|(n|ń)czymy)(\sna\sdzi(ś|(s(iaj?))))?)'
 t_OPEN = r'(?i)(otw(ó|o)rz)|(open)'
 t_RUN = r'(?i)(uruchom)|(odpal)|(w(l|ł)(a|ą)cz)'
 t_WEBPHRASE = r'(?i)(stron(e|ę))|(witryn(e|ę))'
@@ -31,7 +32,7 @@ t_DOCPHRASE = r'(?i)((dokument)|(plik))(\stekstowy)?'
 t_PROGPHRASE = r'(?i)(program)|(aplikacj(a|ę|e))'
 t_CLOSE = r'(?i)(zamknij)|(zako(ń|n)cz)|(wy(l|ł)(a|ą)cz)'
 t_EXECUTABLE = r'(?i)([a-z\+\.]+)'
-t_VOICE = r'(?i)((asystent\s)?(g(l|ł)os(owy)?))|(d(z|ź)wi(e|ę)k)'
+t_VOICE = r'(?i)((asystent(a?)\s)?(g(l|ł)os(ow(y|ego))?))|(d(z|ź)wi(e|ę)k)'
 
 
 # website
@@ -153,7 +154,8 @@ def p_operation_voiceOff(t):
     notify("Dźwięk został wyłączony")
 
 def p_operation_exit(t):
-    'operation : BYE'
+    '''operation : BYE
+    | CLOSE'''
     notify("Żegnam")
     exit()
 
