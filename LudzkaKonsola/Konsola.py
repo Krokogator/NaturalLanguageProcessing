@@ -5,8 +5,8 @@ print("Przykładowe komendy: ")
 print("> \"Otwórz google.pl\"")
 print("> \"Otwórz mspaint.exe\"")
 print("> \"Zamknij mspainte.exe\"")
-print("> \"Otwórz C:/Users/user/Desktop/dokument.txt\"")
-print("> \"Bye\"")
+print("> \"Otwórz C:/Users/userX/Desktop/dokument.txt\"")
+print("> \"Koniec na dzisiaj\"")
 
 tokens = (
     'BYE',
@@ -17,14 +17,14 @@ tokens = (
 # Tokens
 
 # operations
-t_BYE = r'(?i)bye!?'
-t_OPEN = r'(?i)(otwó|orz)'
+t_BYE = r'(?i)(zamknij)|(zako(ń|n)cz)|(ko(niec|(n|ń)czymy)\sna\sdzi(ś|(s(iaj?))))'
+t_OPEN = r'(?i)(otw(ó|o)rz)'
 t_CLOSE = r'(?i)(zamknij)|(zakoń|ncz)'
 
 
 # executable
 def t_EXECUTABLE(t):
-    r'[a-z\+]+\.exe'
+    r'(?i)[a-z\+]+(\.exe)?'
     return t
 
 # website
@@ -99,9 +99,8 @@ def p_operation_open_website(t):
 
 def p_operation_open_exe(t):
     'operation : OPEN EXECUTABLE'
-    import win32api  # if active state python is installed or install pywin32 package seperately
     try:
-        win32api.WinExec(t[2])  # Works seamlessly
+        os.system(t[2]) # Works seamlessly
         notify("Otwieram program " + t[2])
     except:
         pass
@@ -115,6 +114,7 @@ def p_operation_close_exe(t):
 
 def p_operation_exit(t):
     'operation : BYE'
+    notify("Żegnam")
     exit()
 
 

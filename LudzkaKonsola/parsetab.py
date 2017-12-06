@@ -7,7 +7,7 @@ _lr_method = 'LALR'
 
 _lr_signature = 'BYE OPEN CLOSE WEBSITE EXECUTABLE TXTPATHoperation : OPEN TXTPATHoperation : OPEN WEBSITEoperation : OPEN EXECUTABLEoperation : CLOSE EXECUTABLEoperation : BYE'
     
-_lr_action_items = {'TXTPATH':([1,],[5,]),'WEBSITE':([1,],[6,]),'OPEN':([0,],[1,]),'$end':([2,4,5,6,7,8,],[0,-5,-1,-2,-3,-4,]),'CLOSE':([0,],[3,]),'EXECUTABLE':([1,3,],[7,8,]),'BYE':([0,],[4,]),}
+_lr_action_items = {'TXTPATH':([4,],[6,]),'$end':([1,3,5,6,7,8,],[0,-5,-4,-1,-3,-2,]),'CLOSE':([0,],[2,]),'WEBSITE':([4,],[8,]),'BYE':([0,],[3,]),'EXECUTABLE':([2,4,],[5,7,]),'OPEN':([0,],[4,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'operation':([0,],[2,]),}
+_lr_goto_items = {'operation':([0,],[1,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,9 +26,9 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> operation","S'",1,None,None,None),
-  ('operation -> OPEN TXTPATH','operation',2,'p_operation_open_txt','Konsola.py',88),
-  ('operation -> OPEN WEBSITE','operation',2,'p_operation_open_website','Konsola.py',94),
-  ('operation -> OPEN EXECUTABLE','operation',2,'p_operation_open_exe','Konsola.py',100),
-  ('operation -> CLOSE EXECUTABLE','operation',2,'p_operation_close_exe','Konsola.py',110),
-  ('operation -> BYE','operation',1,'p_operation_exit','Konsola.py',116),
+  ('operation -> OPEN TXTPATH','operation',2,'p_operation_open_txt','Konsola.py',89),
+  ('operation -> OPEN WEBSITE','operation',2,'p_operation_open_website','Konsola.py',95),
+  ('operation -> OPEN EXECUTABLE','operation',2,'p_operation_open_exe','Konsola.py',101),
+  ('operation -> CLOSE EXECUTABLE','operation',2,'p_operation_close_exe','Konsola.py',111),
+  ('operation -> BYE','operation',1,'p_operation_exit','Konsola.py',117),
 ]

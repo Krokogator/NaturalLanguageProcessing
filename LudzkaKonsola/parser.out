@@ -34,55 +34,55 @@ state 0
     (4) operation -> . CLOSE EXECUTABLE
     (5) operation -> . BYE
 
-    OPEN            shift and go to state 1
-    CLOSE           shift and go to state 3
-    BYE             shift and go to state 4
+    OPEN            shift and go to state 4
+    CLOSE           shift and go to state 2
+    BYE             shift and go to state 3
 
-    operation                      shift and go to state 2
+    operation                      shift and go to state 1
 
 state 1
-
-    (1) operation -> OPEN . TXTPATH
-    (2) operation -> OPEN . WEBSITE
-    (3) operation -> OPEN . EXECUTABLE
-
-    TXTPATH         shift and go to state 5
-    WEBSITE         shift and go to state 6
-    EXECUTABLE      shift and go to state 7
-
-
-state 2
 
     (0) S' -> operation .
 
 
 
-state 3
+state 2
 
     (4) operation -> CLOSE . EXECUTABLE
 
-    EXECUTABLE      shift and go to state 8
+    EXECUTABLE      shift and go to state 5
 
 
-state 4
+state 3
 
     (5) operation -> BYE .
 
     $end            reduce using rule 5 (operation -> BYE .)
 
 
+state 4
+
+    (1) operation -> OPEN . TXTPATH
+    (2) operation -> OPEN . WEBSITE
+    (3) operation -> OPEN . EXECUTABLE
+
+    TXTPATH         shift and go to state 6
+    WEBSITE         shift and go to state 8
+    EXECUTABLE      shift and go to state 7
+
+
 state 5
 
-    (1) operation -> OPEN TXTPATH .
+    (4) operation -> CLOSE EXECUTABLE .
 
-    $end            reduce using rule 1 (operation -> OPEN TXTPATH .)
+    $end            reduce using rule 4 (operation -> CLOSE EXECUTABLE .)
 
 
 state 6
 
-    (2) operation -> OPEN WEBSITE .
+    (1) operation -> OPEN TXTPATH .
 
-    $end            reduce using rule 2 (operation -> OPEN WEBSITE .)
+    $end            reduce using rule 1 (operation -> OPEN TXTPATH .)
 
 
 state 7
@@ -94,7 +94,7 @@ state 7
 
 state 8
 
-    (4) operation -> CLOSE EXECUTABLE .
+    (2) operation -> OPEN WEBSITE .
 
-    $end            reduce using rule 4 (operation -> CLOSE EXECUTABLE .)
+    $end            reduce using rule 2 (operation -> OPEN WEBSITE .)
 
