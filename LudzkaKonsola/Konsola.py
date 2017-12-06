@@ -1,35 +1,42 @@
 import os
 import webbrowser
+import ply.yacc as yacc
+
+global textToSpeech
+textToSpeech = False
 
 print("Przykładowe komendy: ")
-print("> \"Otwórz google.pl\"")
-print("> \"Otwórz mspaint.exe\"")
-print("> \"Zamknij mspainte.exe\"")
-print("> \"Otwórz C:/Users/userX/Desktop/dokument.txt\"")
+print("> \"Otwórz (stronę|witrynę)? google.pl\"")
+print("> \"Otwórz (program|aplikację)? chrome\"")
+print("> \"Zamknij (program|aplikację)? chrome\"")
+print("> \"Otwórz (dokument|plik|plik tekstowy)? C:/Users/userX/Desktop/dokument.txt\"")
 print("> \"Koniec na dzisiaj\"")
 
 tokens = (
     'BYE',
-    'OPEN', 'CLOSE',
-    'WEBSITE', 'EXECUTABLE', 'TXTPATH'
+    'OPEN', 'RUN', 'CLOSE',
+    'WEBPHRASE', 'DOCPHRASE', 'PROGPHRASE',
+    'WEBSITE', 'EXECUTABLE', 'TXTPATH',
+    'VOICE'
 )
 
 # Tokens
 
 # operations
-t_BYE = r'(?i)(zamknij)|(zako(ń|n)cz)|(ko(niec|(n|ń)czymy)\sna\sdzi(ś|(s(iaj?))))'
-t_OPEN = r'(?i)(otw(ó|o)rz)'
-t_CLOSE = r'(?i)(zamknij)|(zakoń|ncz)'
+t_BYE = r'(?i)(ko(niec|(n|ń)czymy)\sna\sdzi(ś|(s(iaj?))))'
+t_OPEN = r'(?i)(otw(ó|o)rz)|(open)'
+t_RUN = r'(?i)(uruchom)|(odpal)|(w(l|ł)(a|ą)cz)'
+t_WEBPHRASE = r'(?i)(stron(e|ę))|(witryn(e|ę))'
+t_DOCPHRASE = r'(?i)((dokument)|(plik))(\stekstowy)?'
+t_PROGPHRASE = r'(?i)(program)|(aplikacj(a|ę|e))'
+t_CLOSE = r'(?i)(zamknij)|(zako(ń|n)cz)|(wy(l|ł)(a|ą)cz)'
+t_EXECUTABLE = r'(?i)([a-z\+\.]+)'
+t_VOICE = r'(?i)((asystent\s)?(g(l|ł)os(owy)?))|(d(z|ź)wi(e|ę)k)'
 
-
-# executable
-def t_EXECUTABLE(t):
-    r'(?i)[a-z\+]+(\.exe)?'
-    return t
 
 # website
 def t_WEBSITE(t):
-    r'(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+(pl)|(com)'
+    r'(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+((pl)|(com))'
     return t
 
 # path to txt file
@@ -74,7 +81,8 @@ Start = 'operation'
 
 def notify(text):
     print(text)
-    text_to_speech(text)
+    if textToSpeech:
+        text_to_speech(text)
 
 
 def text_to_speech(text):
@@ -86,31 +94,63 @@ def text_to_speech(text):
 # operations
 
 def p_operation_open_txt(t):
-    'operation : OPEN TXTPATH'
+    'operation : docopen TXTPATH'
     os.startfile(t[2])
     notify("Otwieram dokument " + t[2])
 
+def p_docopen(t):
+    '''docopen : OPEN
+               | OPEN DOCPHRASE'''
 
 def p_operation_open_website(t):
-    'operation : OPEN WEBSITE'
+    'operation : webopen WEBSITE'
     webbrowser.open_new_tab(t[2])
     notify("Otwieram stronę " + t[2])
 
 
+def p_webopen(t):
+    '''webopen : OPEN
+               | OPEN WEBPHRASE'''
+
 def p_operation_open_exe(t):
-    'operation : OPEN EXECUTABLE'
+    'operation : progopen EXECUTABLE'
     try:
-        os.system(t[2]) # Works seamlessly
+        os.startfile(t[2]) # Works seamlessly
         notify("Otwieram program " + t[2])
     except:
+        notify("Nie odnaleziono programu " + t[2])
         pass
 
+def p_progopen(t):
+    '''progopen : OPEN
+    | OPEN PROGPHRASE
+    | RUN
+    | RUN PROGPHRASE'''
 
 def p_operation_close_exe(t):
-    'operation : CLOSE EXECUTABLE'
-    print(t[2])
-    os.system("TASKKILL /F /IM " + t[2])
+    'operation : progclose EXECUTABLE'
+    if(os.system("TASKKILL /F /IM " + t[2]) == 0):
+        notify("Program " + t[2] + " został zamknięty")
+    elif(os.system("TASKKILL /F /IM " + t[2]+".exe") == 0):
+        notify("Program " + t[2] + " został zamknięty")
+    else:
+        notify("Nie odnaleziono programu " + t[2])
 
+def p_progclose(t):
+    '''progclose : CLOSE
+               | CLOSE PROGPHRASE'''
+
+def p_operation_voiceOn(t):
+    'operation : RUN VOICE'
+    global textToSpeech
+    textToSpeech = True
+    notify("Dźwięk został włączony")
+
+def p_operation_voiceOff(t):
+    'operation : CLOSE VOICE'
+    global textToSpeech
+    textToSpeech = False
+    notify("Dźwięk został wyłączony")
 
 def p_operation_exit(t):
     'operation : BYE'
@@ -126,13 +166,13 @@ def p_error(token):
         print('BŁĄD');
 
 
-import ply.yacc as yacc
+
 
 parser = yacc.yacc()
 
 while True:
     try:
-        s = input('> ')
+        s = input('Input > ')
     except EOFError:
         break
     parser.parse(s)
