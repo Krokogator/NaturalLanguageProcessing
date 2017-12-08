@@ -40,6 +40,7 @@ def t_WEBSITE(t):
     r'(http\:\/\/|https\:\/\/)?([a-z0-9][a-z0-9\-]*\.)+((pl)|(com))'
     return t
 
+
 # path to txt file
 def t_TXTPATH(t):
     r'(?i)([a-z]\:)((\/|\\)?[a-z0-9][a-z0-9\-]+)*\.(txt)'
@@ -99,9 +100,11 @@ def p_operation_open_txt(t):
     os.startfile(t[2])
     notify("Otwieram dokument " + t[2])
 
+
 def p_docopen(t):
     '''docopen : OPEN
                | OPEN DOCPHRASE'''
+
 
 def p_operation_open_website(t):
     'operation : webopen WEBSITE'
@@ -113,14 +116,16 @@ def p_webopen(t):
     '''webopen : OPEN
                | OPEN WEBPHRASE'''
 
+
 def p_operation_open_exe(t):
     'operation : progopen EXECUTABLE'
     try:
-        os.startfile(t[2]) # Works seamlessly
+        os.startfile(t[2])  # Works seamlessly
         notify("Otwieram program " + t[2])
     except:
         notify("Nie odnaleziono programu " + t[2])
         pass
+
 
 def p_progopen(t):
     '''progopen : OPEN
@@ -128,18 +133,21 @@ def p_progopen(t):
     | RUN
     | RUN PROGPHRASE'''
 
+
 def p_operation_close_exe(t):
     'operation : progclose EXECUTABLE'
-    if(os.system("TASKKILL /F /IM " + t[2]) == 0):
+    if (os.system("TASKKILL /F /IM " + t[2]) == 0):
         notify("Program " + t[2] + " został zamknięty")
-    elif(os.system("TASKKILL /F /IM " + t[2]+".exe") == 0):
+    elif (os.system("TASKKILL /F /IM " + t[2] + ".exe") == 0):
         notify("Program " + t[2] + " został zamknięty")
     else:
         notify("Nie odnaleziono programu " + t[2])
 
+
 def p_progclose(t):
     '''progclose : CLOSE
                | CLOSE PROGPHRASE'''
+
 
 def p_operation_voiceOn(t):
     'operation : RUN VOICE'
@@ -147,11 +155,13 @@ def p_operation_voiceOn(t):
     textToSpeech = True
     notify("Dźwięk został włączony")
 
+
 def p_operation_voiceOff(t):
     'operation : CLOSE VOICE'
     global textToSpeech
     textToSpeech = False
     notify("Dźwięk został wyłączony")
+
 
 def p_operation_exit(t):
     '''operation : BYE
@@ -166,8 +176,6 @@ def p_error(token):
         print('BŁĄD');
     else:
         print('BŁĄD');
-
-
 
 
 parser = yacc.yacc()

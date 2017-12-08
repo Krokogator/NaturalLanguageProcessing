@@ -3,98 +3,238 @@ Created by PLY version 3.10 (http://www.dabeaz.com/ply)
 Grammar
 
 Rule 0     S' -> operation
-Rule 1     operation -> OPEN TXTPATH
-Rule 2     operation -> OPEN WEBSITE
-Rule 3     operation -> OPEN EXECUTABLE
-Rule 4     operation -> CLOSE EXECUTABLE
-Rule 5     operation -> BYE
+Rule 1     operation -> docopen TXTPATH
+Rule 2     docopen -> OPEN
+Rule 3     docopen -> OPEN DOCPHRASE
+Rule 4     operation -> webopen WEBSITE
+Rule 5     webopen -> OPEN
+Rule 6     webopen -> OPEN WEBPHRASE
+Rule 7     operation -> progopen EXECUTABLE
+Rule 8     progopen -> OPEN
+Rule 9     progopen -> OPEN PROGPHRASE
+Rule 10    progopen -> RUN
+Rule 11    progopen -> RUN PROGPHRASE
+Rule 12    operation -> progclose EXECUTABLE
+Rule 13    progclose -> CLOSE
+Rule 14    progclose -> CLOSE PROGPHRASE
+Rule 15    operation -> RUN VOICE
+Rule 16    operation -> CLOSE VOICE
+Rule 17    operation -> BYE
+Rule 18    operation -> CLOSE
 
 Terminals, with rules where they appear
 
-BYE                  : 5
-CLOSE                : 4
-EXECUTABLE           : 3 4
-OPEN                 : 1 2 3
+BYE                  : 17
+CLOSE                : 13 14 16 18
+DOCPHRASE            : 3
+EXECUTABLE           : 7 12
+OPEN                 : 2 3 5 6 8 9
+PROGPHRASE           : 9 11 14
+RUN                  : 10 11 15
 TXTPATH              : 1
-WEBSITE              : 2
+VOICE                : 15 16
+WEBPHRASE            : 6
+WEBSITE              : 4
 error                : 
 
 Nonterminals, with rules where they appear
 
+docopen              : 1
 operation            : 0
+progclose            : 12
+progopen             : 7
+webopen              : 4
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . operation
-    (1) operation -> . OPEN TXTPATH
-    (2) operation -> . OPEN WEBSITE
-    (3) operation -> . OPEN EXECUTABLE
-    (4) operation -> . CLOSE EXECUTABLE
-    (5) operation -> . BYE
+    (1) operation -> . docopen TXTPATH
+    (4) operation -> . webopen WEBSITE
+    (7) operation -> . progopen EXECUTABLE
+    (12) operation -> . progclose EXECUTABLE
+    (15) operation -> . RUN VOICE
+    (16) operation -> . CLOSE VOICE
+    (17) operation -> . BYE
+    (18) operation -> . CLOSE
+    (2) docopen -> . OPEN
+    (3) docopen -> . OPEN DOCPHRASE
+    (5) webopen -> . OPEN
+    (6) webopen -> . OPEN WEBPHRASE
+    (8) progopen -> . OPEN
+    (9) progopen -> . OPEN PROGPHRASE
+    (10) progopen -> . RUN
+    (11) progopen -> . RUN PROGPHRASE
+    (13) progclose -> . CLOSE
+    (14) progclose -> . CLOSE PROGPHRASE
 
-    OPEN            shift and go to state 4
-    CLOSE           shift and go to state 2
-    BYE             shift and go to state 3
+    RUN             shift and go to state 4
+    CLOSE           shift and go to state 9
+    BYE             shift and go to state 2
+    OPEN            shift and go to state 1
 
-    operation                      shift and go to state 1
+    webopen                        shift and go to state 5
+    docopen                        shift and go to state 7
+    operation                      shift and go to state 6
+    progclose                      shift and go to state 3
+    progopen                       shift and go to state 8
 
 state 1
+
+    (2) docopen -> OPEN .
+    (3) docopen -> OPEN . DOCPHRASE
+    (5) webopen -> OPEN .
+    (6) webopen -> OPEN . WEBPHRASE
+    (8) progopen -> OPEN .
+    (9) progopen -> OPEN . PROGPHRASE
+
+    TXTPATH         reduce using rule 2 (docopen -> OPEN .)
+    DOCPHRASE       shift and go to state 12
+    WEBSITE         reduce using rule 5 (webopen -> OPEN .)
+    WEBPHRASE       shift and go to state 11
+    EXECUTABLE      reduce using rule 8 (progopen -> OPEN .)
+    PROGPHRASE      shift and go to state 10
+
+
+state 2
+
+    (17) operation -> BYE .
+
+    $end            reduce using rule 17 (operation -> BYE .)
+
+
+state 3
+
+    (12) operation -> progclose . EXECUTABLE
+
+    EXECUTABLE      shift and go to state 13
+
+
+state 4
+
+    (15) operation -> RUN . VOICE
+    (10) progopen -> RUN .
+    (11) progopen -> RUN . PROGPHRASE
+
+    VOICE           shift and go to state 15
+    EXECUTABLE      reduce using rule 10 (progopen -> RUN .)
+    PROGPHRASE      shift and go to state 14
+
+
+state 5
+
+    (4) operation -> webopen . WEBSITE
+
+    WEBSITE         shift and go to state 16
+
+
+state 6
 
     (0) S' -> operation .
 
 
 
-state 2
-
-    (4) operation -> CLOSE . EXECUTABLE
-
-    EXECUTABLE      shift and go to state 5
-
-
-state 3
-
-    (5) operation -> BYE .
-
-    $end            reduce using rule 5 (operation -> BYE .)
-
-
-state 4
-
-    (1) operation -> OPEN . TXTPATH
-    (2) operation -> OPEN . WEBSITE
-    (3) operation -> OPEN . EXECUTABLE
-
-    TXTPATH         shift and go to state 6
-    WEBSITE         shift and go to state 8
-    EXECUTABLE      shift and go to state 7
-
-
-state 5
-
-    (4) operation -> CLOSE EXECUTABLE .
-
-    $end            reduce using rule 4 (operation -> CLOSE EXECUTABLE .)
-
-
-state 6
-
-    (1) operation -> OPEN TXTPATH .
-
-    $end            reduce using rule 1 (operation -> OPEN TXTPATH .)
-
-
 state 7
 
-    (3) operation -> OPEN EXECUTABLE .
+    (1) operation -> docopen . TXTPATH
 
-    $end            reduce using rule 3 (operation -> OPEN EXECUTABLE .)
+    TXTPATH         shift and go to state 17
 
 
 state 8
 
-    (2) operation -> OPEN WEBSITE .
+    (7) operation -> progopen . EXECUTABLE
 
-    $end            reduce using rule 2 (operation -> OPEN WEBSITE .)
+    EXECUTABLE      shift and go to state 18
+
+
+state 9
+
+    (16) operation -> CLOSE . VOICE
+    (18) operation -> CLOSE .
+    (13) progclose -> CLOSE .
+    (14) progclose -> CLOSE . PROGPHRASE
+
+    VOICE           shift and go to state 20
+    $end            reduce using rule 18 (operation -> CLOSE .)
+    EXECUTABLE      reduce using rule 13 (progclose -> CLOSE .)
+    PROGPHRASE      shift and go to state 19
+
+
+state 10
+
+    (9) progopen -> OPEN PROGPHRASE .
+
+    EXECUTABLE      reduce using rule 9 (progopen -> OPEN PROGPHRASE .)
+
+
+state 11
+
+    (6) webopen -> OPEN WEBPHRASE .
+
+    WEBSITE         reduce using rule 6 (webopen -> OPEN WEBPHRASE .)
+
+
+state 12
+
+    (3) docopen -> OPEN DOCPHRASE .
+
+    TXTPATH         reduce using rule 3 (docopen -> OPEN DOCPHRASE .)
+
+
+state 13
+
+    (12) operation -> progclose EXECUTABLE .
+
+    $end            reduce using rule 12 (operation -> progclose EXECUTABLE .)
+
+
+state 14
+
+    (11) progopen -> RUN PROGPHRASE .
+
+    EXECUTABLE      reduce using rule 11 (progopen -> RUN PROGPHRASE .)
+
+
+state 15
+
+    (15) operation -> RUN VOICE .
+
+    $end            reduce using rule 15 (operation -> RUN VOICE .)
+
+
+state 16
+
+    (4) operation -> webopen WEBSITE .
+
+    $end            reduce using rule 4 (operation -> webopen WEBSITE .)
+
+
+state 17
+
+    (1) operation -> docopen TXTPATH .
+
+    $end            reduce using rule 1 (operation -> docopen TXTPATH .)
+
+
+state 18
+
+    (7) operation -> progopen EXECUTABLE .
+
+    $end            reduce using rule 7 (operation -> progopen EXECUTABLE .)
+
+
+state 19
+
+    (14) progclose -> CLOSE PROGPHRASE .
+
+    EXECUTABLE      reduce using rule 14 (progclose -> CLOSE PROGPHRASE .)
+
+
+state 20
+
+    (16) operation -> CLOSE VOICE .
+
+    $end            reduce using rule 16 (operation -> CLOSE VOICE .)
 
